@@ -1,59 +1,61 @@
-﻿var rand = new Random();
-
-
-void CutArray()
-{
-
-    int arrayLength = rand.Next(3, 15);
-    Console.WriteLine(arrayLength);
-    string[] array = new string[arrayLength];
-    PrintArray(array);
-    array = FillArray(array, arrayLength);
-    PrintArray(array);
-    string newArray[]
-    for (int i = 0)
-}
-
-
-
-string[] FillArray(string[] array, int arrayLength, int currentIndex = 0, string currentAnswer = "firstAnswer") // Метод заполнения массива пользователем
+﻿string[] FillArray(string[] array, int arrayLength, int currentIndex = 0, string currentAnswer = "firstAnswer") // Метод заполнения массива пользователем
 {
     Console.Write("Введите элемент массива:");
     currentAnswer = Console.ReadLine();
-    array[currentIndex++] = currentAnswer;
-    if (String.IsNullOrEmpty(currentAnswer) || currentIndex >= arrayLength)
+    if (String.IsNullOrEmpty(currentAnswer) == false && currentIndex < arrayLength)
     {
-        return array;
+        array[currentIndex++] = currentAnswer;
+        return FillArray(array, arrayLength, currentIndex, currentAnswer);
     }
     else
     {
-        return FillArray(array, arrayLength, currentIndex, currentAnswer);
+        if (currentIndex < arrayLength)
+        {
+            Array.Resize(ref array, currentIndex);
+        }
+        return array;
     }
 }
 
-// string[] ShortValies(string[] array, int length)
-// {
-//     int arrayLength = array.Length;
-//     string[] newArray = new string[arrayLength];
-//     int j = 0;
-//     for (int i = 0; i < arrayLength; i++)
-//     {
-//         if (array[i].Length <= 3)
-//         {
-//             newArray[j++] = array[i];
-//         }
-//     }
-//     Array.Resize(newArray, j + 1);
-//     return newArray;
-// }
-
-
-
+string[] ShortValies(string[] array, int length) // метод, которыей создаёт новый массив только из строк заданной длинны
+{
+    int arrayLength = array.Length;
+    string[] newArray = new string[arrayLength];
+    int j = 0;
+    for (int i = 0; i < arrayLength; i++)
+    {
+        if (array[i].Length <= 3)
+        {
+            newArray[j] = array[i];
+            j++;
+        }
+    }
+    Array.Resize(ref newArray, j);
+    return newArray;
+}
 
 void PrintArray(string[] array) // метод печати массива
 {
+    Console.WriteLine("");//пустая строка для красоты
     Console.WriteLine(string.Join(" ", array));
+    Console.WriteLine("");//пустая строка для красоты
 }
 
+void CutArray()
+{
+    Console.Write("Введите первоначальную длинну массива: ");
+    int arrayLength = Convert.ToInt32(Console.ReadLine());
+    string[] array = new string[arrayLength];
+    array = FillArray(array, arrayLength);
+    Console.WriteLine("");//пустая строка для красоты
+    Console.WriteLine("Длинна парвоначального массива: " + array.Length);
+    Console.Write("Первоначальный массив: ");
+    PrintArray(array);
+    Console.WriteLine("");//пустая строка для красоты
+    string[] newArray = ShortValies(array, 3);
+    Console.WriteLine("Итоговая длинна массива: " + newArray.Length);
+    Console.Write("Итоговый массив: ");
+    PrintArray(newArray);
+}
 
 CutArray(); // запуск программы
