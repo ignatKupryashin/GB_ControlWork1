@@ -1,6 +1,6 @@
 ﻿string[] FillArray(string[] array, int arrayLength, int currentIndex = 0, string currentAnswer = "firstAnswer") // Метод заполнения массива пользователем
 {
-    Console.Write("Введите элемент массива:");
+    Console.Write("Введите элемент массива или ведите пустую строку для остановки:");
     currentAnswer = Console.ReadLine();
     if (String.IsNullOrEmpty(currentAnswer) == false && currentIndex < arrayLength)
     {
@@ -17,14 +17,14 @@
     }
 }
 
-string[] ShortValies(string[] array, int length) // метод, которыей создаёт новый массив только из строк заданной длинны
+string[] ShortValues(string[] array, int stringLength) // метод, которыей создаёт новый массив только из строк заданной длинны
 {
     int arrayLength = array.Length;
     string[] newArray = new string[arrayLength];
     int j = 0;
     for (int i = 0; i < arrayLength; i++)
     {
-        if (array[i].Length <= 3)
+        if (array[i].Length <= stringLength)
         {
             newArray[j++] = array[i];
         }
@@ -51,7 +51,7 @@ void CutArray()
     Console.Write("Первоначальный массив: ");
     PrintArray(array);
     Console.WriteLine("");//пустая строка для красоты
-    string[] newArray = ShortValies(array, 3);
+    string[] newArray = ShortValues(array, 3);
     Console.WriteLine("Итоговая длинна массива: " + newArray.Length);
     Console.Write("Итоговый массив: ");
     PrintArray(newArray);
