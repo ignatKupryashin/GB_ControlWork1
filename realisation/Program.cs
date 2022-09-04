@@ -26,8 +26,7 @@ string[] ShortValies(string[] array, int length) // метод, которыей
     {
         if (array[i].Length <= 3)
         {
-            newArray[j] = array[i];
-            j++;
+            newArray[j++] = array[i];
         }
     }
     Array.Resize(ref newArray, j);
